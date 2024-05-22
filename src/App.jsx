@@ -35,7 +35,8 @@ function App() {
   // 2nd value - always a function provided by react, used to update the stored value
   //             valling wil also make react re-render the component w/ new data
   // selectedTopic re-created when setSelectedTopic is called
-  const [selectedTopic, setSelectedTopic] = useState('components');
+  // const [selectedTopic, setSelectedTopic] = useState('components');
+  const [selectedTopic, setSelectedTopic] = useState();
 
   function handleSelect (selectedButton) { 
     // selectedbutton => 'components', 'jsx', 'props', 'state'
@@ -47,6 +48,36 @@ function App() {
   }
 
   console.log('App component rendering');
+
+  // can also use {!selectedTopic && <p>Please select a topic</p>}
+  // or 
+  // {!selectedTopic ? 
+  //   (<p>Please select a topic</p>) : 
+  //   (<div id='tab-content'>
+  //     <h3>{EXAMPLES[selectedTopic].title}</h3>
+  //     <p>{EXAMPLES[selectedTopic].description}</p>
+  //     <pre>
+  //       <code>
+  //         {EXAMPLES[selectedTopic].code}
+  //       </code>
+  //     </pre>
+  //   </div>)
+  // }
+
+  let tabContent = <p>Please select a topic</p>;
+  if (selectedTopic) {
+    tabContent = (
+      <div id='tab-content'>
+        <h3>{EXAMPLES[selectedTopic].title}</h3>
+        <p>{EXAMPLES[selectedTopic].description}</p>
+        <pre>
+          <code>
+            {EXAMPLES[selectedTopic].code}
+          </code>
+        </pre>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -64,24 +95,14 @@ function App() {
         <section id='examples'>
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={() => handleSelect('components')}>Components</TabButton>
-            <TabButton onSelect={() => handleSelect('jsx')}>JSX</TabButton>
-            <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
-            <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
+            <TabButton isSelected={selectedTopic === 'components'} onSelect={() => handleSelect('components')}>Components</TabButton>
+            <TabButton isSelected={selectedTopic === 'jsx'} onSelect={() => handleSelect('jsx')}>JSX</TabButton>
+            <TabButton isSelected={selectedTopic === 'props'} onSelect={() => handleSelect('props')}>Props</TabButton>
+            <TabButton isSelected={selectedTopic === 'state'} onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
 
-          <div id='tab-content'>
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>
-                {EXAMPLES[selectedTopic].code}
-              </code>
-            </pre>
-          </div>
-
-        {/* {selectedTopic} */}
-        
+          {tabContent}
+          
         </section>
       </main>
     </div>
