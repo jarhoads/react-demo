@@ -1,23 +1,14 @@
 
 // import componentsImg from './assets/components.png';
-import {useState} from 'react';
+// import {useState} from 'react';
+// import { CORE_CONCEPTS, EXAMPLES } from './data.js';
+// import { EXAMPLES } from './data.js';
+// import CoreConcept from './components/CoreConcept.jsx';
+// import TabButton from './components/TabButton.jsx';
 
-import { CORE_CONCEPTS, EXAMPLES } from './data.js';
 import Header from './components/Header/Header.jsx';
-import CoreConcept from './components/CoreConcept.jsx';
-import TabButton from './components/TabButton.jsx';
-
-// function CoreConcept(props) {
-//   return ( 
-//     <li>
-//       <img src={props.image} alt={props.title} />
-//       <h3>{props.title}</h3>
-//       <p>{props.description}</p>
-//     </li>
-//   );
-// }
-
-
+import CoreConcepts from './components/CoreConcepts.jsx';
+import Examples from './components/Examples.jsx';
 
 function App() {
   // can't use a regular variable in react to update state
@@ -36,77 +27,14 @@ function App() {
   //             valling wil also make react re-render the component w/ new data
   // selectedTopic re-created when setSelectedTopic is called
   // const [selectedTopic, setSelectedTopic] = useState('components');
-  const [selectedTopic, setSelectedTopic] = useState();
-
-  function handleSelect (selectedButton) { 
-    // selectedbutton => 'components', 'jsx', 'props', 'state'
-    // tabContent = selectedButton;
-    // NOTE: updated value will only be available after the component function re-executes
-    //       this call is scheduling it to run in the next cycle
-    setSelectedTopic(selectedButton);
-    console.log(`Hello World! - selected button: ${selectedButton}`); 
-  }
-
-  console.log('App component rendering');
-
-  // can also use {!selectedTopic && <p>Please select a topic</p>}
-  // or 
-  // {!selectedTopic ? 
-  //   (<p>Please select a topic</p>) : 
-  //   (<div id='tab-content'>
-  //     <h3>{EXAMPLES[selectedTopic].title}</h3>
-  //     <p>{EXAMPLES[selectedTopic].description}</p>
-  //     <pre>
-  //       <code>
-  //         {EXAMPLES[selectedTopic].code}
-  //       </code>
-  //     </pre>
-  //   </div>)
-  // }
-
-  let tabContent = <p>Please select a topic</p>;
-  if (selectedTopic) {
-    tabContent = (
-      <div id='tab-content'>
-        <h3>{EXAMPLES[selectedTopic].title}</h3>
-        <p>{EXAMPLES[selectedTopic].description}</p>
-        <pre>
-          <code>
-            {EXAMPLES[selectedTopic].code}
-          </code>
-        </pre>
-      </div>
-    );
-  }
+  
 
   return (
     <>
       <Header />
       <main>
-        <section id='core-concepts'>
-          <h2>Core Concepts</h2>
-          <ul>
-            {CORE_CONCEPTS.map((conceptItem) => <CoreConcept key={conceptItem.title} {...conceptItem}/>)}
-          </ul>
-        </section>
-        <section id='examples'>
-          <h2>Examples</h2>
-          <menu>
-            <TabButton isSelected={selectedTopic === 'components'} 
-                       onSelect={() => handleSelect('components')}>
-              Components
-            </TabButton>
-            <TabButton isSelected={selectedTopic === 'jsx'} 
-                       onSelect={() => handleSelect('jsx')}>
-              JSX
-            </TabButton>
-            <TabButton isSelected={selectedTopic === 'props'} onSelect={() => handleSelect('props')}>Props</TabButton>
-            <TabButton isSelected={selectedTopic === 'state'} onSelect={() => handleSelect('state')}>State</TabButton>
-          </menu>
-
-          {tabContent}
-          
-        </section>
+        <CoreConcepts />
+        <Examples />
       </main>
     </>
   );
