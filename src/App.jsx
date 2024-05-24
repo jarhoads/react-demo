@@ -1,11 +1,3 @@
-
-// import componentsImg from './assets/components.png';
-// import {useState} from 'react';
-// import { CORE_CONCEPTS, EXAMPLES } from './data.js';
-// import { EXAMPLES } from './data.js';
-// import CoreConcept from './components/CoreConcept.jsx';
-// import TabButton from './components/TabButton.jsx';
-
 import Header from './components/Header/Header.jsx';
 import CoreConcepts from './components/CoreConcepts.jsx';
 import Examples from './components/Examples.jsx';
