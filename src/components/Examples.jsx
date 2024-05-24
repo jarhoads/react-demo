@@ -50,9 +50,11 @@ export default function Examples () {
   // id prop for 'examples' not set on section 
   // only added when done explicitly in code
   // --> use forwarded/proxy props
+  // custom components (variables) for buttonsContainer must be passed with {Section} 
     return (
       <Section title={"Examples"} id="examples">
         <Tabs
+          ButtonsContainer='menu'
           buttons={
             <>
               <TabButton
